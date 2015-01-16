@@ -1,17 +1,15 @@
 <script>
   function Store(name, hrsOp, hrlyFt, percentEnt, qtyPer) {
-      this.name = name;
-      this.hrsOp = hrsOp;
-      this.hrlyFt = hrlyFt;
+      this.name       = name;
+      this.hrsOp      = hrsOp;
+      this.hrlyFt     = hrlyFt;
       this.percentEnt = percentEnt;
-      this.qtyPer = qtyPer;
-      this.hrlyPurch = [];
-      this.total = 0;
-      /*Borrowed code below from http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range.  Calculates how many customers enter based on random traffic generated from function and then multiplies by average donuts purchased per customer*/
+      this.qtyPer     = qtyPer;
+      this.hrlyPurch  = [];
+      this.total      = 0;
       this.ranTraffic = function getRandomInt(min, max) {
         var ranTraf = Math.floor(Math.random() * (max - min + 1)) + min;
-        return ranTraf;
-        var customers = Math.floor((this.ranTraffic(min,max) * (this.percentEnt / 100)) * this.qtyPer);
+        var customers = Math.floor((ranTraf * (this.percentEnt / 100)) * this.qtyPer);
         return customers;
       };
       this.dailyTtl =function(){
