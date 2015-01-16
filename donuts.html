@@ -1,0 +1,50 @@
+<script>
+  function Store(name, hrsOp, hrlyFt, percentEnt, qtyPer) {
+      this.name = name;
+      this.hrsOp = hrsOp;
+      this.hrlyFt = hrlyFt;
+      this.percentEnt = percentEnt;
+      this.qtyPer = qtyPer;
+      this.hrlyPurch = [];
+      this.total = 0;
+      /*Borrowed code below from http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range.  Calculates how many customers enter based on random traffic generated from function and then multiplies by average donuts purchased per customer*/
+      this.ranTraffic = function getRandomInt(min, max) {
+        var ranTraf = Math.floor(Math.random() * (max - min + 1)) + min;
+        return ranTraf;
+        var customers = Math.floor((this.ranTraffic(min,max) * (this.percentEnt / 100)) * this.qtyPer);
+        return customers;
+      };
+      this.dailyTtl =function(){
+        var ttlPerHr;
+        for(j = 1; j <= 11; j++) {
+          this.hrlyPurch.push(this.ranTraffic(this.hrlyFt[0], this.hrlyFt[1]));
+          ttlPerHr = this.ranTraffic(this.hrlyFt[0], this.hrlyFt[1]);
+          this.total += ttlPerHr;
+        }
+        return this.total;
+      }
+    }
+
+  var stores = [];
+
+  stores[0] = new Store ("Downtown",11, [80, 220], 10, 4);
+  stores[1] = new Store ("Capitol Hill", 11, [5, 45], 45, 2);
+  stores[2] = new Store ("South Lake Union", 11, [180, 250], 5, 6);
+  stores[3] = new Store ("Wedgewood", 11, [20, 60], 20, 1.5);
+  stores[4] = new Store ("Ballard", 11, [25, 75], 33, 1);
+
+
+  var hrs = ["7 and 8 a.m.", "8 and 9 a.m.", "9 and 10 a.m.", "10 and 11 a.m.", "11 a.m. and 12 p.m.", "12 and 1 p.m.", "1 and 2 p.m.", "2 and 3 p.m.", "3 and 4 p.m.", "4 and 5 p.m.", "5 and 6 p.m."];
+
+  for(i = 0; i <= (stores.length - 1); i++){
+  //Running a conditional loop to produce data for each hour of the day that the store is open
+    stores[i].dailyTtl();
+    console.log("-------------------------------------");
+    for(k = 0; k <= 10; k++) {
+      console.log(stores[i].name + " needs " + stores[i].hrlyPurch[k] + " donuts between " + hrs[k]);
+    };
+
+    console.log(stores[i].name + " needs " + stores[i].total + " donuts per day");
+  }
+
+</script>
