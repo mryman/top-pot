@@ -7,7 +7,6 @@
       this.qtyPer     = qtyPer;
       this.hrlyPurch  = [];
       this.total      = 0;
-      /*Borrowed code below from http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range.  Calculates how many customers enter based on random traffic generated from function and then multiplies by average donuts purchased per customer*/
       this.ranTraffic = function getRandomInt(min, max) {
         var ranTraf = Math.floor(Math.random() * (max - min + 1)) + min;
         var customers = Math.floor((ranTraf * (this.percentEnt / 100)) * this.qtyPer);
